@@ -99,6 +99,30 @@ getCollection().replaceOne(
         notification
 )
 
+// Verificando se existe um item em um array, de um campo de um documento
+// userNotification: {
+//    id: 34
+//    ...
+//    usertokens: [
+//        {
+//            0: {
+//              tokenFCM: 1
+//            },
+//            1: {
+//              tokenFCM: 2
+//            }
+//        }
+//    ]
+// }
+// A primeira query no mongodb, me retorna o documento, que com
+// .first() consigo trabalhar como sendo a class UserNotification
+// E nela consigo iterar no attributo usertokens que e um array
+// Fiz essa iteração pq não consegui fazer tudo com uma query
+// direto no mongodb
+val document = getCollection().find(Filters.eq("_id", cognitoSub)).first()
+
+document.usertokens.filter { it.tokenFCM == "userTokenFCM.tokenFCM" }.isEmpty()
+
 ```
 
 </br>
